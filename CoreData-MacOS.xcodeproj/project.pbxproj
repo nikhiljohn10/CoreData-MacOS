@@ -16,6 +16,7 @@
 		A5187A21244FC9ED00D6F5B4 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5187A20244FC9ED00D6F5B4 /* DataModel.swift */; };
 		A5187A24244FCAC200D6F5B4 /* Student+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5187A22244FCAC200D6F5B4 /* Student+CoreDataClass.swift */; };
 		A5187A25244FCAC200D6F5B4 /* Student+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5187A23244FCAC200D6F5B4 /* Student+CoreDataProperties.swift */; };
+		A5187A27244FCD7000D6F5B4 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A5187A26244FCD7000D6F5B4 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		A5187A20244FC9ED00D6F5B4 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		A5187A22244FCAC200D6F5B4 /* Student+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Student+CoreDataClass.swift"; sourceTree = "<group>"; };
 		A5187A23244FCAC200D6F5B4 /* Student+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Student+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A5187A26244FCD7000D6F5B4 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +49,7 @@
 		A51879FE244FC9C700D6F5B4 = {
 			isa = PBXGroup;
 			children = (
+				A5187A26244FCD7000D6F5B4 /* README.md */,
 				A5187A22244FCAC200D6F5B4 /* Student+CoreDataClass.swift */,
 				A5187A23244FCAC200D6F5B4 /* Student+CoreDataProperties.swift */,
 				A5187A09244FC9C700D6F5B4 /* CoreData-MacOS */,
@@ -146,6 +149,7 @@
 			files = (
 				A5187A18244FC9C800D6F5B4 /* Main.storyboard in Resources */,
 				A5187A15244FC9C800D6F5B4 /* Preview Assets.xcassets in Resources */,
+				A5187A27244FCD7000D6F5B4 /* README.md in Resources */,
 				A5187A12244FC9C800D6F5B4 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
