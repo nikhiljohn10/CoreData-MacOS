@@ -13,31 +13,33 @@ struct ContentView: View {
     @State private var students = [Student]()
     @State private var name: String = ""
     var body: some View {
-        let data = DataModel(self.moc)
+        let model = DataModel(self.moc)
         return VStack{
             HStack {
                 TextField("Name", text: self.$name, onCommit: {
-                    if self.name.count>0 {
-                        self.students = try! data.insertStudent(name: self.name)
-                        self.name = ""
-                    }
+                    self.students = model.addStudent(name: self.name)
+                    self.name = ""
                 })
                 Button("Add") {
-                    if self.name.count>0 {
-                        self.students = try! data.insertStudent(name: self.name)
-                        self.name = ""
-                    }
+                    self.students = model.addStudent(name: self.name)
+                    self.name = ""
                 }
-                Button("Delete All") {
-                    self.students = try! data.deleteAll()
+                Button("Delete") {
+                    self.students = model.deleteStudents(withName: self.name)
+                    self.name = ""
+                }
+                Button("Find") {
+                    self.students = model.getStudents(withName: self.name)
+                    self.name = ""
                 }
             }
             List {
                 ForEach(self.students, id: \.self){ student in
                     HStack {
                         Text(student.name ?? "Unknown")
+                        Spacer()
                         Button("Delete"){
-                            self.students = try! data.delete(student: student)
+                            self.students = model.delete(student: student)
                         }
                     }
                 }
@@ -47,7 +49,7 @@ struct ContentView: View {
         .padding(4)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .onAppear{
-            self.students = try! data.fetchStudents()
+            self.students = model.getStudents()
         }
     }
 }

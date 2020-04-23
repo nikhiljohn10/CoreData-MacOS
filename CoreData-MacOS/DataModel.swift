@@ -16,51 +16,57 @@ class DataModel {
         self.context = moc
     }
     
-    func insertStudent(name: String) throws -> [Student] {
-        let student = Student(context: self.context)
-        student.name = name
-        self.context.insert(student)
-        try self.context.save()
-        return try! self.fetchStudents()
-    }
-    
-    func fetchStudents() throws -> [Student] {
-        let students = try self.context.fetch(Student.fetchRequest() as NSFetchRequest<Student>)
-        return students
-    }
-    
-    func fetchStudents(withName name: String) throws -> [Student] {
-        let request = NSFetchRequest<Student>(entityName: "Student")
-        request.sortDescriptors = [sort]
-        request.predicate = NSPredicate(format: "name == %@", name)
-        
-        let students = try self.context.fetch(request)
-        return students
-    }
-    
-    func delete(student: Student) throws -> [Student] {
-        self.context.delete(student)
-        try self.context.save()
-        return try! self.fetchStudents()
-    }
-    
-    func deleteStudents(withName name: String) throws -> [Student] {
-        let fetchRequest = Student.fetchRequest() as NSFetchRequest<NSFetchRequestResult>
-        fetchRequest.predicate = NSPredicate(format: "name == %@", name)
-        
-        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-        try self.context.execute(deleteRequest)
-        try self.context.save()
-        return try! self.fetchStudents()
-    }
-    
-    func  deleteAll() throws -> [Student] {
-        let students = try! self.fetchStudents()
-        for student in students{
-            self.context.delete(student)
-            try self.context.save()
+    func addStudent(name: String) -> [Student] {
+        let text = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        if text != "" {
+            let student = Student(context: self.context)
+            student.name = text
+            self.context.insert(student)
+            self.save()
         }
-        return try! self.fetchStudents()
+        return self.getStudents()
+    }
+    
+    func getStudents(withName name: String = "*") -> [Student] {
+        let request = Student.fetchRequest() as NSFetchRequest<Student>
+        request.sortDescriptors = [sort]
+        if name != "*" {
+            request.predicate = NSPredicate(format: "name CONTAINS %@", name)
+        }
+        do {
+            return try self.context.fetch(request)
+        } catch {
+            fatalError("Error: Unable to get data")
+        }
+    }
+    
+    func delete(student: Student) -> [Student] {
+        self.context.delete(student)
+        self.save()
+        return self.getStudents()
+    }
+    
+    func deleteStudents(withName name: String = "*") -> [Student] {
+        let fetchRequest = Student.fetchRequest() as NSFetchRequest<NSFetchRequestResult>
+        if name != "*" {
+            fetchRequest.predicate = NSPredicate(format: "name CONTAINS %@", name)
+        }
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        do {
+            try self.context.execute(deleteRequest)
+            self.save()
+        } catch {
+            fatalError("Error: Unable to delete")
+        }
+        return self.getStudents()
+    }
+    
+    func save() {
+        do {
+            try self.context.save()
+        } catch {
+            fatalError("Error: Unable to save")
+        }
     }
     
 }
