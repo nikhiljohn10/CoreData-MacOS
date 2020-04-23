@@ -12,27 +12,16 @@ import CoreData
 
 @objc(Student)
 public class Student: NSManagedObject {
-
+    
 }
 
 extension Student {
-
+    
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Student> {
-        let request = NSFetchRequest<Student>(entityName: "Student")
-        request.sortDescriptors = [
-            NSSortDescriptor(key: "name", ascending: true)
-        ]
-        return request
+        return NSFetchRequest<Student>(entityName: "Student")
     }
     
-    @nonobjc public class func getAllStudents(_ context: NSManagedObjectContext) -> [Student] {
-        do {
-            return try context.fetch(self.fetchRequest() as NSFetchRequest<Student>)
-        } catch {
-            fatalError("Error: Unable to get data")
-        }
-    }
-
+    @NSManaged public var id: UUID?
     @NSManaged public var name: String?
-
+    
 }

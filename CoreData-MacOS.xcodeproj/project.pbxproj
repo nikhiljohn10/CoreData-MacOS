@@ -16,6 +16,9 @@
 		A5187A21244FC9ED00D6F5B4 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5187A20244FC9ED00D6F5B4 /* DataModel.swift */; };
 		A5187A25244FCAC200D6F5B4 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5187A23244FCAC200D6F5B4 /* CoreData.swift */; };
 		A5187A27244FCD7000D6F5B4 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A5187A26244FCD7000D6F5B4 /* README.md */; };
+		A5187A312451A28E00D6F5B4 /* StudentsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5187A302451A28E00D6F5B4 /* StudentsList.swift */; };
+		A5187A332451A31500D6F5B4 /* StudentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5187A322451A31500D6F5B4 /* StudentsView.swift */; };
+		A5187A352451A60400D6F5B4 /* StudentRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5187A342451A60400D6F5B4 /* StudentRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +34,9 @@
 		A5187A20244FC9ED00D6F5B4 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		A5187A23244FCAC200D6F5B4 /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
 		A5187A26244FCD7000D6F5B4 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		A5187A302451A28E00D6F5B4 /* StudentsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsList.swift; sourceTree = "<group>"; };
+		A5187A322451A31500D6F5B4 /* StudentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsView.swift; sourceTree = "<group>"; };
+		A5187A342451A60400D6F5B4 /* StudentRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,10 +72,13 @@
 			children = (
 				A5187A23244FCAC200D6F5B4 /* CoreData.swift */,
 				A5187A0A244FC9C700D6F5B4 /* AppDelegate.swift */,
+				A5187A20244FC9ED00D6F5B4 /* DataModel.swift */,
 				A5187A0C244FC9C700D6F5B4 /* ContentView.swift */,
+				A5187A322451A31500D6F5B4 /* StudentsView.swift */,
+				A5187A302451A28E00D6F5B4 /* StudentsList.swift */,
+				A5187A342451A60400D6F5B4 /* StudentRow.swift */,
 				A5187A11244FC9C800D6F5B4 /* Assets.xcassets */,
 				A5187A16244FC9C800D6F5B4 /* Main.storyboard */,
-				A5187A20244FC9ED00D6F5B4 /* DataModel.swift */,
 				A5187A19244FC9C800D6F5B4 /* Info.plist */,
 				A5187A1A244FC9C800D6F5B4 /* CoreData_MacOS.entitlements */,
 				A5187A0E244FC9C700D6F5B4 /* CoreData_MacOS.xcdatamodeld */,
@@ -160,7 +169,10 @@
 			files = (
 				A5187A25244FCAC200D6F5B4 /* CoreData.swift in Sources */,
 				A5187A10244FC9C700D6F5B4 /* CoreData_MacOS.xcdatamodeld in Sources */,
+				A5187A352451A60400D6F5B4 /* StudentRow.swift in Sources */,
+				A5187A332451A31500D6F5B4 /* StudentsView.swift in Sources */,
 				A5187A21244FC9ED00D6F5B4 /* DataModel.swift in Sources */,
+				A5187A312451A28E00D6F5B4 /* StudentsList.swift in Sources */,
 				A5187A0D244FC9C700D6F5B4 /* ContentView.swift in Sources */,
 				A5187A0B244FC9C700D6F5B4 /* AppDelegate.swift in Sources */,
 			);

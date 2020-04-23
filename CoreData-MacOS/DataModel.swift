@@ -9,47 +9,56 @@
 import Foundation
 import CoreData
 
-class DataModel {
-    var context: NSManagedObjectContext
-    let sort = NSSortDescriptor(key: "name", ascending: true)
+class DataModel: ObservableObject {
+    @Published var context: NSManagedObjectContext
+    
+    // App Data
+    @Published var students: [Student] = [Student]()
+    @Published var name: String = ""
+    
+    
     init(_ moc: NSManagedObjectContext) {
         self.context = moc
     }
     
-    func addStudent(name: String) -> [Student] {
-        let text = name.trimmingCharacters(in: .whitespacesAndNewlines)
-        if text != "" {
-            let student = Student(context: self.context)
-            student.name = text
-            self.context.insert(student)
-            self.save()
-        }
-        return self.getStudents()
-    }
-    
-    func getStudents(withName name: String = "*") -> [Student] {
+    func getStudents() {
         let request = Student.fetchRequest() as NSFetchRequest<Student>
+        let sort = NSSortDescriptor(key: "name", ascending: true)
         request.sortDescriptors = [sort]
-        if name != "*" {
-            request.predicate = NSPredicate(format: "name CONTAINS %@", name)
+        let text = self.name.trimmingCharacters(in: .whitespacesAndNewlines)
+        if text != "" {
+            request.predicate = NSPredicate(format: "name CONTAINS %@", text)
         }
         do {
-            return try self.context.fetch(request)
+            self.students = try self.context.fetch(request)
         } catch {
             fatalError("Error: Unable to get data")
         }
     }
     
-    func delete(student: Student) -> [Student] {
-        self.context.delete(student)
-        self.save()
-        return self.getStudents()
+    func addStudent() {
+        let text = self.name.trimmingCharacters(in: .whitespacesAndNewlines)
+        if text != "" {
+            let student = Student(context: self.context)
+            student.id = UUID()
+            student.name = text
+            self.context.insert(student)
+            self.save()
+        }
+        self.resetTextField()
+        self.getStudents()
     }
     
-    func deleteStudents(withName name: String = "*") -> [Student] {
+    func deleteStudent(student: Student) {
+        self.context.delete(student)
+        self.save()
+        self.getStudents()
+    }
+    
+    func deleteStudents() {
         let fetchRequest = Student.fetchRequest() as NSFetchRequest<NSFetchRequestResult>
-        if name != "*" {
-            fetchRequest.predicate = NSPredicate(format: "name CONTAINS %@", name)
+        if self.name != "" {
+            fetchRequest.predicate = NSPredicate(format: "name CONTAINS %@", self.name)
         }
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         do {
@@ -58,7 +67,12 @@ class DataModel {
         } catch {
             fatalError("Error: Unable to delete")
         }
-        return self.getStudents()
+        self.resetTextField()
+        self.getStudents()
+    }
+    
+    func resetTextField() {
+        self.name = ""
     }
     
     func save() {
