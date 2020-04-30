@@ -33,8 +33,6 @@ struct StudentsView: View {
                 }
             }
             StudentsList()
-        }.onAppear{
-            self.model.getStudents()
         }
     }
 }

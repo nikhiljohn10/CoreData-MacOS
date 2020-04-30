@@ -1,24 +1,25 @@
 //
-//  DataModel.swift
+//  Model.swift
 //  CoreData-MacOS
 //
 //  Created by Nikhil John on 22/04/20.
 //  Copyright © 2020 Nikz.in. All rights reserved.
 //
 
-import Foundation
-import CoreData
+import SwiftUI
 
 class Model: ObservableObject {
     @Published var context: NSManagedObjectContext
     
     // App Data
     @Published var students: [Student] = [Student]()
+    @Published var selection: Student? = nil
     @Published var name: String = ""
     
     
-    init(_ moc: NSManagedObjectContext) {
-        self.context = moc
+    init(_ context: NSManagedObjectContext) {
+        self.context = context
+        self.getStudents()
     }
     
     func getStudents() {
@@ -40,7 +41,9 @@ class Model: ObservableObject {
         let text = self.name.trimmingCharacters(in: .whitespacesAndNewlines)
         if text != "" {
             let student = Student(context: self.context)
+            student.roll = "\(Int.random(in: 0...9))\(Int.random(in: 0...9))\(Int.random(in: 0...9))\(Int.random(in: 0...9))\(Int.random(in: 0...9))\(Int.random(in: 0...9))"
             student.name = text
+            student.gpa = Float.random(in: 2.0...4.8)
             self.context.insert(student)
             self.save()
         }
@@ -75,10 +78,13 @@ class Model: ObservableObject {
     }
     
     func save() {
-        do {
-            try self.context.save()
-        } catch {
-            fatalError("Error: Unable to save")
+        if self.context.hasChanges {
+            do {
+                try self.context.save()
+            } catch {
+                let nserror = error as NSError
+                NSApplication.shared.presentError(nserror)
+            }
         }
     }
     

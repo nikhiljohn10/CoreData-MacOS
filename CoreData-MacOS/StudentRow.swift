@@ -14,11 +14,10 @@ struct StudentRow: View {
     @State private var selected: Bool = false
     var body: some View {
         HStack {
+            Text(self.student.roll ?? "000000").frame(width: 60)
             Text(self.student.name ?? "Unknown")
             Spacer()
-            Button("Delete"){
-                self.model.deleteStudent(student: self.student)
-            }.frame(width: 60)
+            Text("\(self.student.gpa, specifier: "%.1f")").frame(width: 60)
         }
     }
 }
