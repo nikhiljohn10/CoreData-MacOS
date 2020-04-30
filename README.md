@@ -78,7 +78,7 @@ Solution: Go to preference -> Location tab -> Access Derived folder location and
 
 ### Bonus Code
 
-This code help the user to reopen properly when closed with red close button on window
+This code help the user to properly closed with red close button on window
 
 ```
 // AppDelegate.swift
@@ -87,11 +87,8 @@ This code help the user to reopen properly when closed with red close button on 
 class AppDelegate: NSObject, NSApplicationDelegate {
     ...
     
-    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
-        if !flag {
-            window.makeKeyAndOrderFront(nil)
-        }
-        return true
+    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+         return true
     }
 }
 ```

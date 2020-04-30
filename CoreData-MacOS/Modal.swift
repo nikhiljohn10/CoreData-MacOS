@@ -16,15 +16,15 @@ struct ModalView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Section(header: Text("Student Name")){
+            HStack {
+                Text("Student Name")
                 TextField("", text: $student.wrappedName)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
             }
-            Section(header: Text("Student GPA")){
-                HStack{
-                    Text("\(self.student.wrappedGPA, specifier: "%.1f")").frame(width: 30)
-                    Slider(value: self.$student.wrappedGPA, in: 0...5, step: 0.1)
-                }
+            HStack{
+                Text("Student GPA")
+                Slider(value: self.$student.wrappedGPA, in: 0...5, step: 0.1)
+                Text("\(self.student.wrappedGPA, specifier: "%.1f")").frame(width: 30)
             }
             Spacer()
             HStack {

@@ -14,12 +14,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var model: Model!
     var window: NSWindow!
     
-    // Help user to reopen properly when closed with red close button on window
-    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
-        if !flag {
-            window.makeKeyAndOrderFront(nil)
-        }
-        return true
+    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+         return true
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
