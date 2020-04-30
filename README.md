@@ -12,12 +12,13 @@ Model Class:
                         context         // ManagedObject Context
                         students        // Data fetched from CoreData
                         name            // textfield property
+                        selection       // Used by List to track selected student
+                        saved           // Track save action on status bar
             methods:
                         getStudents     // Fetch all students if 'name' string is empty, else fetch names containing string in 'name' property
                         addStudent      //  Add a new Student Object in CoreData using string in 'name' property
                         deleteStudent   // Delete specific student from list
                         deleteStudents  // Delete all students if 'name' string is empty, else delete names containing string in 'name' property
-                        resetTextField  // Reset value of the property 'name'
                         save            // Save the context to CoreData
 ```
 
@@ -69,8 +70,7 @@ final class Model: ObservableObject {
 
 1. Unable to access model inside sheet
 
-Solution: Inject model in to  Modal View (`ModalView(showModal: self.$showModal)
-.environmentObject(self.model)`
+Solution: Inject model in to  Modal View (`ModalView(showModal: self.$showModal).environmentObject(self.model)`
 
 2. The autocompletion is not working
 
