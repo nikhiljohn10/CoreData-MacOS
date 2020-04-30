@@ -4,23 +4,23 @@
 
 CoreData -> AppDelegate -> Create Persistent Container (by Default) with ViewContext // Select coredata checked when creating new project
 
-ManagedObjectConext(from AppDelegate) -> DataModel Class via init( ) method 
+ManagedObjectConext(from AppDelegate) -> Model Class via init( ) method  -> EnvironmentObject -> ContentView
+
 ```
-DataModel Class:
-                properties:
-                            context         // ManagedObject Context
-                            students        // Data fetched from CoreData
-                            name            // textfield property
-                methods:
-                            getStudents     // Fetch all students if 'name' string is empty, else fetch names containing string in 'name' property
-                            addStudent      //  Add a new Student Object in CoreData using string in 'name' property
-                            deleteStudent   // Delete specific student from list
-                            deleteStudents  // Delete all students if 'name' string is empty, else delete names containing string in 'name' property
-                            resetTextField  // Reset value of the property 'name'
-                            save            // Save the context to CoreData
+Model Class:
+            properties:
+                        context         // ManagedObject Context
+                        students        // Data fetched from CoreData
+                        name            // textfield property
+            methods:
+                        getStudents     // Fetch all students if 'name' string is empty, else fetch names containing string in 'name' property
+                        addStudent      //  Add a new Student Object in CoreData using string in 'name' property
+                        deleteStudent   // Delete specific student from list
+                        deleteStudents  // Delete all students if 'name' string is empty, else delete names containing string in 'name' property
+                        resetTextField  // Reset value of the property 'name'
+                        save            // Save the context to CoreData
 ```
 
-DataModel(ManagedObjectConext) is passed to views as Environment Object inside Content View.
 
 ### How to start a core data project in SwiftUI using Xcode 11.4
 
@@ -30,28 +30,51 @@ DataModel(ManagedObjectConext) is passed to views as Environment Object inside C
 
 3. Select Product_Name.xcdatamodeld file from Project Navigator on left side -> Create New Entity & Rename it
 
-4. Click on Entity you created to reveal Data Model Inspector on right side -> Change codegen to Manual/None
+4. Add Needed Attributes and Relationship in CoreData Model Editor
 
-5. Add Needed Attributes and Relationship in CoreData Model Editor
-
-6. While inside Model Editor, Click Editor Menu on top menu bar -> Click on Create NSManagedObject Subclass (This create all the sub classes needed to use CoreData. I have combined the 2 files generated for better understanding in the file CoreData.swift) 
-
-7. The coredata app template already filled AppDelegate.swift with necessary CoreData codes and send the view context in to ContentView.swift as Environment Value. Use `@Environment(\.managedObjectContext) var context` to access the context in Content View.
-
-8. Add a new Swift File to Manage the Data (Here it is named DataModel.swift) -> Create a new sub class in it with `ObservableObject` as superclass.
-
-9. Add following initialiser  and Published wapped property in the subclass
+5. The coredata app template already filled AppDelegate.swift with necessary CoreData codes. But we need to inject Model Object in to content view instead of context. Make the following changes in AppDelegate.swift:
 ```
-@Published var context: NSManagedObjectContext
+@NSApplicationMain
+class AppDelegate: NSObject, NSApplicationDelegate {
+    var model: Model!
+    var window: NSWindow!
+    
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
+    
+        model = Model(persistentContainer.viewContext)
+        let contentView = ContentView().environmentObject(model)
 
-init(_ moc: NSManagedObjectContext) {
-    self.context = moc
+        ...
+    
+    }
 }
 ```
-10. Add all the publically required properties in the subclass with `@Published` property wrapper
+6. Add a new Swift File to Manage the Data (Here it is named Model.swift) -> Create a new sub class in it with `ObservableObject` as superclass.
 
-11. Initialise the subclass inside Content View as EnvironmentObject. For Example: `MasterView().environmentObject(SubClass(self.context))`
+7. Add following initialiser  and Published wapped property in the subclass (Here, the subclass is `final class Model` )
+```
+final class Model: ObservableObject {
+    @Published var context: NSManagedObjectContext
 
+    init(_ moc: NSManagedObjectContext) {
+        self.context = moc
+    }
+}
+```
+8. Add `@Published` property wrapper will all the publically required properties in the subclass
+
+9. Use `@EnvironmentObject var model: Model` to access the CoreData Object in Model class.
+
+### TroubleShoot
+
+1. Unable to access model inside sheet
+
+Solution: Inject model in to  Modal View (`ModalView(showModal: self.$showModal)
+.environmentObject(self.model)`
+
+2. The autocompletion is not working
+
+Solution: Go to preference -> Location tab -> Access Derived folder location and Delete the `DerivedData` folder and restart Xcode
 
 ### Bonus Code
 
