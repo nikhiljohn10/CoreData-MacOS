@@ -18,6 +18,8 @@
 		A5187A312451A28E00D6F5B4 /* StudentsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5187A302451A28E00D6F5B4 /* StudentsList.swift */; };
 		A5187A332451A31500D6F5B4 /* StudentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5187A322451A31500D6F5B4 /* StudentsView.swift */; };
 		A5187A352451A60400D6F5B4 /* StudentRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5187A342451A60400D6F5B4 /* StudentRow.swift */; };
+		A599302B245ADA0B0027EF19 /* StatusBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A599302A245ADA0B0027EF19 /* StatusBar.swift */; };
+		A5D6522F245AB39E005540E7 /* Modal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D6522E245AB39E005540E7 /* Modal.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +37,8 @@
 		A5187A302451A28E00D6F5B4 /* StudentsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsList.swift; sourceTree = "<group>"; };
 		A5187A322451A31500D6F5B4 /* StudentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsView.swift; sourceTree = "<group>"; };
 		A5187A342451A60400D6F5B4 /* StudentRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentRow.swift; sourceTree = "<group>"; };
+		A599302A245ADA0B0027EF19 /* StatusBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBar.swift; sourceTree = "<group>"; };
+		A5D6522E245AB39E005540E7 /* Modal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,8 +76,10 @@
 				A5187A20244FC9ED00D6F5B4 /* Model.swift */,
 				A5187A0C244FC9C700D6F5B4 /* ContentView.swift */,
 				A5187A322451A31500D6F5B4 /* StudentsView.swift */,
+				A599302A245ADA0B0027EF19 /* StatusBar.swift */,
 				A5187A302451A28E00D6F5B4 /* StudentsList.swift */,
 				A5187A342451A60400D6F5B4 /* StudentRow.swift */,
+				A5D6522E245AB39E005540E7 /* Modal.swift */,
 				A5187A11244FC9C800D6F5B4 /* Assets.xcassets */,
 				A5187A16244FC9C800D6F5B4 /* Main.storyboard */,
 				A5187A19244FC9C800D6F5B4 /* Info.plist */,
@@ -167,6 +173,8 @@
 				A5187A10244FC9C700D6F5B4 /* CoreData_MacOS.xcdatamodeld in Sources */,
 				A5187A352451A60400D6F5B4 /* StudentRow.swift in Sources */,
 				A5187A332451A31500D6F5B4 /* StudentsView.swift in Sources */,
+				A599302B245ADA0B0027EF19 /* StatusBar.swift in Sources */,
+				A5D6522F245AB39E005540E7 /* Modal.swift in Sources */,
 				A5187A21244FC9ED00D6F5B4 /* Model.swift in Sources */,
 				A5187A312451A28E00D6F5B4 /* StudentsList.swift in Sources */,
 				A5187A0D244FC9C700D6F5B4 /* ContentView.swift in Sources */,
@@ -318,6 +326,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "in.nikz.CoreData-MacOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -341,6 +350,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "in.nikz.CoreData-MacOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

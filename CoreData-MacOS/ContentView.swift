@@ -12,6 +12,6 @@ struct ContentView: View {
     var body: some View {
         StudentsView()
             .padding(4)
-            .frame(minWidth: 400, maxWidth: .infinity, minHeight: 200, maxHeight: .infinity)
+            .frame(minWidth: 380, maxWidth: .infinity, minHeight: 300, maxHeight: .infinity)
     }
 }

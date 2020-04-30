@@ -15,7 +15,7 @@ struct StudentsView: View {
             HStack {
                 TextField("Student Name", text: self.$model.name, onCommit: {
                     self.model.getStudents()
-                })
+                    }).textFieldStyle(RoundedBorderTextFieldStyle())
                 Button("Add") {
                     self.model.addStudent()
                 }
@@ -33,6 +33,8 @@ struct StudentsView: View {
                 }
             }
             StudentsList()
+            Spacer()
+            StatusBar()
         }
     }
 }

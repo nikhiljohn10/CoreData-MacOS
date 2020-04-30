@@ -11,7 +11,7 @@ import SwiftUI
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-    
+    var model: Model!
     var window: NSWindow!
     
     // Help user to reopen properly when closed with red close button on window
@@ -25,7 +25,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Create the SwiftUI view and set the context as the value for the managedObjectContext environment keyPath.
         // Add `@Environment(\.managedObjectContext)` in the views that will need the context.
-        let contentView = ContentView().environmentObject(Model(persistentContainer.viewContext))
+        model = Model(persistentContainer.viewContext)
+        let contentView = ContentView().environmentObject(model)
         
         // Create the window and set the content view. 
         window = NSWindow(
@@ -73,6 +74,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }()
     
     // MARK: - Core Data Saving and Undo support
+    
+    @IBAction func saveState(_ sender: Any) {
+        model.save()
+    }
     
     @IBAction func saveAction(_ sender: AnyObject?) {
         // Performs the save action for the application, which is to send the save: message to the application's managed object context. Any encountered errors are presented to the user.

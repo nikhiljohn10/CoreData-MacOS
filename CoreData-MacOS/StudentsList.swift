@@ -27,6 +27,9 @@ struct StudentsList: View {
                 ForEach(self.model.students, id: \.self){ student in
                     StudentRow(student: student).tag(student)
                 }
+                .onMove(perform: { source, destination in
+                    self.model.students.move(fromOffsets: source, toOffset: destination)
+                })
             }
             .onDeleteCommand(perform: {
                 if let std = self.model.selection {

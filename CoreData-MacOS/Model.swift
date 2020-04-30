@@ -8,6 +8,23 @@
 
 import SwiftUI
 
+extension Student {
+    var wrappedName: String {
+        get { name ?? "Unknown Student" }
+        set { name = newValue }
+    }
+    
+    var wrappedRoll: String {
+        get { roll ?? "000000" }
+        set { roll = newValue }
+    }
+    
+    var wrappedGPA: Float {
+        get { gpa }
+        set { gpa = Float(newValue) }
+    }
+}
+
 class Model: ObservableObject {
     @Published var context: NSManagedObjectContext
     
@@ -15,7 +32,12 @@ class Model: ObservableObject {
     @Published var students: [Student] = [Student]()
     @Published var selection: Student? = nil
     @Published var name: String = ""
-    
+    @Published var saved: Bool = false
+    var floatFormat: NumberFormatter {
+        let format = NumberFormatter()
+        format.numberStyle = .decimal
+        return format
+    }
     
     init(_ context: NSManagedObjectContext) {
         self.context = context
@@ -46,15 +68,16 @@ class Model: ObservableObject {
             student.gpa = Float.random(in: 2.0...4.8)
             self.context.insert(student)
             self.save()
+            self.name = ""
+            self.getStudents()
         }
-        self.resetTextField()
-        self.getStudents()
     }
     
     func deleteStudent(student: Student) {
         self.context.delete(student)
         self.save()
         self.getStudents()
+        self.selection = nil
     }
     
     func deleteStudents() {
@@ -66,20 +89,21 @@ class Model: ObservableObject {
         do {
             try self.context.execute(deleteRequest)
             self.save()
+            self.name = ""
+            self.selection = nil
+            self.getStudents()
         } catch {
             fatalError("Error: Unable to delete")
         }
-        self.resetTextField()
-        self.getStudents()
-    }
-    
-    func resetTextField() {
-        self.name = ""
     }
     
     func save() {
         if self.context.hasChanges {
             do {
+                self.saved.toggle()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.saved.toggle()
+                }
                 try self.context.save()
             } catch {
                 let nserror = error as NSError
@@ -87,5 +111,4 @@ class Model: ObservableObject {
             }
         }
     }
-    
 }
