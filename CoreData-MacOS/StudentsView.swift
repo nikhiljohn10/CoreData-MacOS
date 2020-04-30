@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct StudentsView: View {
-    @EnvironmentObject var model: DataModel
+    @EnvironmentObject var model: Model
     var body: some View {
         VStack {
             HStack {

@@ -9,10 +9,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    @Environment(\.managedObjectContext) var moc
     var body: some View {
         StudentsView()
-            .environmentObject(DataModel(self.moc))
             .padding(4)
             .frame(minWidth: 400, maxWidth: .infinity, minHeight: 200, maxHeight: .infinity)
     }

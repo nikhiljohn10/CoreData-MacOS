@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct StudentsList: View {
-    @EnvironmentObject var model: DataModel
+    @EnvironmentObject var model: Model
     var body: some View {
         VStack(spacing: 0) {
             HStack {
@@ -22,8 +22,8 @@ struct StudentsList: View {
             .padding([.leading,.trailing],5)
             .background(Color.gray.opacity(0.3))
             List {
-                ForEach(self.model.students, id: \.id){ student in
-                    StudentRow(student: student)
+                ForEach(self.model.students, id: \.self){ student in
+                    StudentRow(student: student).tag(student)
                 }
             }
         }.cornerRadius(4)

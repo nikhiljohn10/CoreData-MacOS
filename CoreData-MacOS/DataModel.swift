@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-class DataModel: ObservableObject {
+class Model: ObservableObject {
     @Published var context: NSManagedObjectContext
     
     // App Data
@@ -40,7 +40,6 @@ class DataModel: ObservableObject {
         let text = self.name.trimmingCharacters(in: .whitespacesAndNewlines)
         if text != "" {
             let student = Student(context: self.context)
-            student.id = UUID()
             student.name = text
             self.context.insert(student)
             self.save()
