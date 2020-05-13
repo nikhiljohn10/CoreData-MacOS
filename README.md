@@ -1,3 +1,5 @@
+<p align="center"><img src="https://api.nikz.in/icon/256-fff-C-E46EF6-6D77F2" alt="API Worker Template"></p>
+
 #  SwiftUI App for MacOS using CoreData
 
 ### Architecture
